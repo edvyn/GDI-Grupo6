@@ -1,1 +1,1 @@
-Projeto acadêmico desenvolvido na disciplina de Banco de Dados da UFPE, envolvendo modelagem relacional, normalização até 3FN, criação de tabelas com constraints, inserção de dados e consultas SQL de teste em Oracle.
+Projeto acadêmico desenvolvido na disciplina de Banco de Dados da UFPE, envolvendo modelagem relacional, normalização até 4FN, criação de tabelas com constraints, inserção de dados e consultas SQL de teste em Oracle.
