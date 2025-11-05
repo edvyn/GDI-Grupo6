@@ -247,3 +247,19 @@ VALUES ('55566677788', 4, 5, 5, 'Caneta muito boa', SYSDATE);
 
 INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
 VALUES ('99988877766', 5, 3, 5, 'Livro de banco de dados excelente', SYSDATE);
+
+INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
+VALUES ('10987654321', 9, 4, 4, 'Ótimo custo-benefício, chegou rápido.', TO_DATE('2025-10-31 10:00:00','YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
+VALUES ('55566677788', 12, 5, 5, 'Canetas macias e duráveis. Recomendo!', TO_DATE('2025-11-02 14:30:00','YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
+VALUES ('12345678901', 7, 3, 5, 'Material de BD essencial e muito completo.', TO_DATE('2025-11-03 09:15:00','YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
+VALUES ('11122233344', 11, 1, 3, 'O conteúdo é bom, mas a diagramação poderia ser melhor.', TO_DATE('2025-11-04 11:00:00','YYYY-MM-DD HH24:MI:SS'));
+
+INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
+VALUES ('99988877766', 14, 2, 5, 'Conteúdo de alta qualidade. Excelente aquisição.', TO_DATE('2025-11-05 08:30:00','YYYY-MM-DD HH24:MI:SS'));
+
