@@ -233,4 +233,11 @@ WHERE
 
 --26 grant/revoke (n pega no livesql), mas basicamente GRANT concede permissões (select, insert, update, delete)
 -- pra um certo usuário no bd e o REVOKE revoga as permissões.
+---- Concede SELECT e INSERT para usuário 'joao'
+GRANT SELECT, INSERT ON Produto TO joao;
+
+-- Revoga UPDATE para usuário 'joao'
+REVOKE UPDATE ON Produto FROM joao;
+
+
 
