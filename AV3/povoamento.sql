@@ -128,6 +128,34 @@ VALUES (seq_pedido.NEXTVAL, '55566677788', TO_DATE('2025-10-23','YYYY-MM-DD'), '
 INSERT INTO Pedido (cod_pedido, cpf_cliente, data_pedido, forma_pagamento, status)
 VALUES (seq_pedido.NEXTVAL, '99988877766', TO_DATE('2025-10-25','YYYY-MM-DD'), 'Cartão', 'Pago');
 
+INSERT INTO Pedido (cod_pedido, cpf_cliente, data_pedido, forma_pagamento, status)
+VALUES (seq_pedido.NEXTVAL, '12345678901', TO_DATE('2025-10-30','YYYY-MM-DD'), 'Pix', 'Pago');
+
+INSERT INTO Pedido (cod_pedido, cpf_cliente, data_pedido, forma_pagamento, status)
+VALUES (seq_pedido.NEXTVAL, '12345678901', TO_DATE('2025-11-01','YYYY-MM-DD'), 'Cartão', 'Pago');
+
+INSERT INTO Pedido (cod_pedido, cpf_cliente, data_pedido, forma_pagamento, status)
+VALUES (seq_pedido.NEXTVAL, '12345678901', TO_DATE('2025-11-03','YYYY-MM-DD'), 'Pix', 'Pendente');
+
+INSERT INTO Pedido (cod_pedido, cpf_cliente, data_pedido, forma_pagamento, status)
+VALUES (seq_pedido.NEXTVAL, '10987654321', TO_DATE('2025-10-28','YYYY-MM-DD'), 'Cartão', 'Pago');
+
+INSERT INTO Pedido (cod_pedido, cpf_cliente, data_pedido, forma_pagamento, status)
+VALUES (seq_pedido.NEXTVAL, '10987654321', TO_DATE('2025-11-02','YYYY-MM-DD'), 'Pix', 'Pendente');
+
+INSERT INTO Pedido (cod_pedido, cpf_cliente, data_pedido, forma_pagamento, status)
+VALUES (seq_pedido.NEXTVAL, '11122233344', TO_DATE('2025-11-01','YYYY-MM-DD'), 'Boleto', 'Pago');
+
+INSERT INTO Pedido (cod_pedido, cpf_cliente, data_pedido, forma_pagamento, status)
+VALUES (seq_pedido.NEXTVAL, '55566677788', TO_DATE('2025-10-29','YYYY-MM-DD'), 'Pix', 'Pago');
+
+INSERT INTO Pedido (cod_pedido, cpf_cliente, data_pedido, forma_pagamento, status)
+VALUES (seq_pedido.NEXTVAL, '55566677788', TO_DATE('2025-11-04','YYYY-MM-DD'), 'Cartão', 'Pendente');
+
+INSERT INTO Pedido (cod_pedido, cpf_cliente, data_pedido, forma_pagamento, status)
+VALUES (seq_pedido.NEXTVAL, '99988877766', TO_DATE('2025-11-02','YYYY-MM-DD'), 'Pix', 'Pago');
+
+
 -- Entregas
 INSERT INTO Entrega (cod_rastreamento, data_envio, data_recebimento, cod_pedido)
 VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-10-16','YYYY-MM-DD'), TO_DATE('2025-10-18','YYYY-MM-DD'), 1);
@@ -144,12 +172,49 @@ VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-10-24','YYYY-MM-DD'), NULL, 4);
 INSERT INTO Entrega (cod_rastreamento, data_envio, data_recebimento, cod_pedido)
 VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-10-26','YYYY-MM-DD'), TO_DATE('2025-10-27','YYYY-MM-DD'), 5);
 
+INSERT INTO Entrega (cod_rastreamento, data_envio, data_recebimento, cod_pedido)
+VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-10-31','YYYY-MM-DD'), TO_DATE('2025-11-02','YYYY-MM-DD'), 6);
+
+INSERT INTO Entrega (cod_rastreamento, data_envio, data_recebimento, cod_pedido)
+VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-11-02','YYYY-MM-DD'), NULL, 7);
+
+INSERT INTO Entrega (cod_rastreamento, data_envio, data_recebimento, cod_pedido)
+VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-11-03','YYYY-MM-DD'), NULL, 8);
+
+INSERT INTO Entrega (cod_rastreamento, data_envio, data_recebimento, cod_pedido)
+VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-10-29','YYYY-MM-DD'), TO_DATE('2025-10-31','YYYY-MM-DD'), 9);
+
+INSERT INTO Entrega (cod_rastreamento, data_envio, data_recebimento, cod_pedido)
+VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-11-03','YYYY-MM-DD'), NULL, 10);
+
+INSERT INTO Entrega (cod_rastreamento, data_envio, data_recebimento, cod_pedido)
+VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-11-02','YYYY-MM-DD'), TO_DATE('2025-11-04','YYYY-MM-DD'), 11);
+
+INSERT INTO Entrega (cod_rastreamento, data_envio, data_recebimento, cod_pedido)
+VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-10-30','YYYY-MM-DD'), TO_DATE('2025-11-01','YYYY-MM-DD'), 12);
+INSERT INTO Entrega (cod_rastreamento, data_envio, data_recebimento, cod_pedido)
+VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-11-04','YYYY-MM-DD'), NULL, 13);
+
+INSERT INTO Entrega (cod_rastreamento, data_envio, data_recebimento, cod_pedido)
+VALUES (seq_entrega.NEXTVAL, TO_DATE('2025-11-03','YYYY-MM-DD'), TO_DATE('2025-11-05','YYYY-MM-DD'), 14);
+
+
 -- Endereços de entrega
 INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (1, '30140071', 100);
 INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (2, '20040002', 200);
 INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (3, '30140072', 300);
 INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (4, '20040003', 400);
 INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (5, '01001000', 500);
+INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (6, '30140071', 100);
+INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (7, '30140071', 100);
+INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (8, '30140071', 100);
+INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (9, '20040002', 200);
+INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (10, '20040002', 200);
+INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (11, '30140072', 300);
+INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (12, '20040003', 400);
+INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (13, '20040003', 400);
+INSERT INTO Endereco_entrega (cod_rastreamento, cep, numero) VALUES (14, '01001000', 500);
+
 
 -- Contem (itens dos pedidos)
 INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (1, 1, 1);
@@ -157,6 +222,15 @@ INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (2, 4, 2
 INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (3, 2, 1);
 INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (4, 5, 10);
 INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (5, 3, 2);
+INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (6, 2, 1);
+INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (7, 3, 1);
+INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (8, 5, 3);
+INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (9, 4, 5);
+INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (10, 5, 10);
+INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (11, 1, 1);
+INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (12, 5, 15);
+INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (13, 4, 3);
+INSERT INTO Contem (cod_pedido, cod_produto, quantidade_produto) VALUES (14, 2, 1);
 
 -- Avaliações de clientes
 INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
