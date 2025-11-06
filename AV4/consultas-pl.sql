@@ -15,10 +15,10 @@
 14. CURSOR (OPEN, FETCH e CLOSE)
 15. EXCEPTION WHEN --ok
 16. USO DE PARÂMETROS (IN, OUT ou IN OUT)
-17. CREATE OR REPLACE PACKAGE
-18. CREATE OR REPLACE PACKAGE BODY
-19. CREATE OR REPLACE TRIGGER (COMANDO)
-20. CREATE OR REPLACE TRIGGER (LINHA)
+17. CREATE OR REPLACE PACKAGE --ok
+18. CREATE OR REPLACE PACKAGE BODY --ok
+19. CREATE OR REPLACE TRIGGER (COMANDO) --ok 
+20. CREATE OR REPLACE TRIGGER (LINHA) --ok
 */
 
 -- 1, 7, 13, 15
@@ -294,3 +294,99 @@ EXCEPTION
 END;
 /
 
+-- 17
+CREATE OR REPLACE PACKAGE pkg_pedidos AS
+  -- Atualiza o estoque de todos os produtos do pedido
+  PROCEDURE AtualizaEstoquePedido(p_codpedido NUMBER);
+
+  -- Para cada produto vendido, se houver menos que 10 em estoque, gera uma lista com o produto, fornecedor, qntd. em estoque e total de vendas nos ultimos 30 dias.
+  PROCEDURE ListaProdutosBaixoEstoque;
+END pkg_pedidos;
+/
+
+-- 18
+CREATE OR REPLACE PACKAGE BODY pkg_pedidos AS
+
+  PROCEDURE AtualizaEstoquePedido(p_cod_pedido NUMBER) IS
+  BEGIN
+    FOR r IN (
+      SELECT cod_produto, quantidade_produto
+        FROM Contem
+      WHERE cod_pedido = p_cod_pedido
+    ) LOOP
+      UPDATE Produto
+        SET qtd_estoque = qtd_estoque - r.quantidade_produto
+      WHERE cod_produto = r.cod_produto;
+    END LOOP;
+  END;
+
+  PROCEDURE ListaProdutosBaixoEstoque IS
+    CURSOR c_produtos IS
+      SELECT p.cod_produto, p.nome_produto, p.qtd_estoque,
+            f.nome_fornecedor
+        FROM Produto p
+        JOIN Fornece fo ON fo.cod_produto = p.cod_produto
+        JOIN Fornecedor f ON f.cnpj = fo.cnpj_fornecedor
+      WHERE p.qtd_estoque < 10;
+    v_cod_produto Produto.cod_produto%TYPE;
+    v_nome_produto Produto.nome_produto%TYPE;
+    v_qtd_estoque Produto.qtd_estoque%TYPE;
+    v_nome_fornecedor Fornecedor.nome_fornecedor%TYPE;
+    v_vendas_30dias NUMBER;
+  BEGIN
+    OPEN c_produtos;
+    LOOP
+      FETCH c_produtos INTO v_cod_produto, v_nome_produto, v_qtd_estoque, v_nome_fornecedor;
+      EXIT WHEN c_produtos%NOTFOUND;
+      SELECT NVL(SUM(c.quantidade_produto), 0)
+        INTO v_vendas_30dias
+        FROM Contem c
+        JOIN Pedido p ON c.cod_pedido = p.cod_pedido
+      WHERE c.cod_produto = v_cod_produto
+        AND p.data_pedido >= SYSDATE - 30;
+      dbms_output.put_line(
+        'Produto: ' || v_nome_produto ||
+        ' | Fornecedor: ' || v_nome_fornecedor ||
+        ' | Estoque: ' || v_qtd_estoque ||
+        ' | Vendas últimos 30 dias: ' || v_vendas_30dias
+      );
+    END LOOP;
+    CLOSE c_produtos;
+END;
+
+
+END pkg_pedidos;
+/
+
+-- 19
+CREATE OR REPLACE TRIGGER trg_atualiza_estoque
+AFTER INSERT ON Contem
+DECLARE
+    TYPE t_pedidos IS TABLE OF NUMBER;
+    v_cod_pedidos t_pedidos;
+BEGIN
+    SELECT DISTINCT cod_pedido
+    BULK COLLECT INTO v_cod_pedidos
+    FROM Contem
+    WHERE cod_pedido IN (
+        SELECT cod_pedido FROM Contem
+    );
+
+    FOR i IN 1..v_cod_pedidos.COUNT LOOP
+        pkg_pedidos.AtualizaEstoquePedido(v_cod_pedidos(i));
+    END LOOP;
+END;
+/
+
+
+-- 20
+CREATE OR REPLACE TRIGGER trg_log_alteracao_produto
+AFTER UPDATE OF qtd_estoque ON Produto
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE(
+        'Produto ' || :OLD.nome_produto || ' teve estoque alterado de ' || 
+        :OLD.qtd_estoque || ' para ' || :NEW.qtd_estoque
+    );
+END;
+/
