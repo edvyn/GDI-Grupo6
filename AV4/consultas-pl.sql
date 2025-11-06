@@ -318,9 +318,37 @@ CREATE OR REPLACE PACKAGE BODY pkg_pedidos AS
         SET qtd_estoque = qtd_estoque - r.quantidade_produto
       WHERE cod_produto = r.cod_produto;
     END LOOP;
-  END;
+  END AtualizaEstoquePedido;
 
-  PROCEDURE ListaProdutosBaixoEstoque IS
+CREATE OR REPLACE FUNCTION ListaProdutosBaixoEstoque
+  RETURN SYS_REFCURSOR
+AS
+  v_cursor SYS_REFCURSOR;
+BEGIN
+  OPEN v_cursor FOR
+    SELECT
+      p.cod_produto,
+      p.nome_produto,
+      p.qtd_estoque,
+      f.nome_fornecedor,
+      (
+        SELECT NVL(SUM(c.quantidade_produto), 0)
+        FROM Contem c
+        JOIN Pedido pd ON c.cod_pedido = pd.cod_pedido
+        WHERE c.cod_produto = p.cod_produto
+          AND pd.data_pedido >= SYSDATE - 30
+      ) AS vendas_30dias
+    FROM Produto p
+    JOIN Fornece fo ON fo.cod_produto = p.cod_produto
+    JOIN Fornecedor f ON f.cnpj = fo.cnpj_fornecedor
+    WHERE p.qtd_estoque < 10;
+
+  RETURN v_cursor;
+END ListaProdutosBaixoEstoque;
+/
+
+
+   PROCEDURE ListaProdutosBaixoEstoque IS
     CURSOR c_produtos IS
       SELECT p.cod_produto, p.nome_produto, p.qtd_estoque,
             f.nome_fornecedor
@@ -352,41 +380,31 @@ CREATE OR REPLACE PACKAGE BODY pkg_pedidos AS
       );
     END LOOP;
     CLOSE c_produtos;
-END;
-
+  END ListaProdutosBaixoEstoque;
 
 END pkg_pedidos;
 /
 
--- 19
-CREATE OR REPLACE TRIGGER trg_atualiza_estoque
-AFTER INSERT ON Contem
-DECLARE
-    TYPE t_pedidos IS TABLE OF NUMBER;
-    v_cod_pedidos t_pedidos;
-BEGIN
-    SELECT DISTINCT cod_pedido
-    BULK COLLECT INTO v_cod_pedidos
-    FROM Contem
-    WHERE cod_pedido IN (
-        SELECT cod_pedido FROM Contem
-    );
-
-    FOR i IN 1..v_cod_pedidos.COUNT LOOP
-        pkg_pedidos.AtualizaEstoquePedido(v_cod_pedidos(i));
-    END LOOP;
-END;
-/
-
 
 -- 20
-CREATE OR REPLACE TRIGGER trg_log_alteracao_produto
-AFTER UPDATE OF qtd_estoque ON Produto
-FOR EACH ROW
+CREATE OR REPLACE TRIGGER trg_atualiza_estoque
+FOR INSERT ON Contem
+COMPOUND TRIGGER
+  TYPE t_pedidos IS TABLE OF Contem.cod_pedido%TYPE;
+  v_pedidos t_pedidos := t_pedidos();
+
+AFTER EACH ROW IS
 BEGIN
-    DBMS_OUTPUT.PUT_LINE(
-        'Produto ' || :OLD.nome_produto || ' teve estoque alterado de ' || 
-        :OLD.qtd_estoque || ' para ' || :NEW.qtd_estoque
-    );
+  v_pedidos.EXTEND;
+  v_pedidos(v_pedidos.COUNT) := :NEW.cod_pedido;
+END AFTER EACH ROW;
+
+AFTER STATEMENT IS
+BEGIN
+  FOR i IN 1 .. v_pedidos.COUNT LOOP
+    pkg_pedidos.AtualizaEstoquePedido(v_pedidos(i));
+  END LOOP;
+END AFTER STATEMENT;
+
 END;
 /
