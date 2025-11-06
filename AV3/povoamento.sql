@@ -5,10 +5,13 @@ INSERT INTO Cep_endereco (cep, rua, cidade, estado) VALUES ('01001000', 'Praça 
 INSERT INTO Cep_endereco (cep, rua, cidade, estado) VALUES ('30140072', 'Av. Afonso Pena', 'Belo Horizonte', 'MG');
 INSERT INTO Cep_endereco (cep, rua, cidade, estado) VALUES ('20040003', 'Rua das Laranjeiras', 'Rio de Janeiro', 'RJ');
 
+
 -- Fornecedores
 INSERT INTO Fornecedor (cnpj, nome_fornecedor) VALUES ('12345678000199', 'Editora Nova');
 INSERT INTO Fornecedor (cnpj, nome_fornecedor) VALUES ('98765432000155', 'Papelaria Brasil');
 INSERT INTO Fornecedor (cnpj, nome_fornecedor) VALUES ('11122233000144', 'Editora Alfa');
+INSERT INTO Fornecedor (cnpj, nome_fornecedor) VALUES ('38265555503152', 'Papelaria MG');
+INSERT INTO Fornecedor (cnpj, nome_fornecedor) VALUES ('20001534567874', 'Editora Nexus');
 
 -- Clientes
 INSERT INTO Cliente (cpf, nome, email, data_adesao, ultimo_login, cpf_indicador)
@@ -41,6 +44,7 @@ VALUES ('99988877766', 'Lucas Fernandes', 'lucas.fernandes@yahoo.com',
         NULL, 
         NULL);
 
+
 -- Livros
 INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
 VALUES (seq_produto.NEXTVAL, 'Livro: Java Básico', 'Livro de introdução à programação Java', 120.00, 50);
@@ -51,12 +55,44 @@ VALUES (seq_produto.NEXTVAL, 'Livro: Python Avançado', 'Livro para desenvolvedo
 INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
 VALUES (seq_produto.NEXTVAL, 'Livro: Banco de Dados', 'Conceitos e prática SQL', 130.00, 40);
 
+INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
+VALUES (seq_produto.NEXTVAL, 'Livro: Estruturas de Dados em C', 'Conceitos e exemplos práticos de estruturas de dados', 140.00, 35);
+
+INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
+VALUES (seq_produto.NEXTVAL, 'Livro: HTML e CSS', 'Guia completo de desenvolvimento web front-end', 110.00, 45);
+
+INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
+VALUES (seq_produto.NEXTVAL, 'Livro: Lógica de Programação', 'Aprenda lógica de programação passo a passo', 90.00, 60);
+
+INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
+VALUES (seq_produto.NEXTVAL, 'Livro: Inteligência Artificial', 'Fundamentos e aplicações práticas de IA', 180.00, 25);
+
+INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
+VALUES (seq_produto.NEXTVAL, 'Livro: Engenharia de Software', 'Princípios e práticas modernas', 160.00, 40);
+
+
 -- Artigos de papelaria
 INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
 VALUES (seq_produto.NEXTVAL, 'Caderno Universitário', 'Caderno 100 folhas', 15.50, 200);
 
 INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
 VALUES (seq_produto.NEXTVAL, 'Caneta Esferográfica', 'Caneta azul 0.7mm', 3.50, 500);
+
+INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
+VALUES (seq_produto.NEXTVAL, 'Lápis HB2', 'Lápis de grafite com borracha', 2.00, 300);
+
+INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
+VALUES (seq_produto.NEXTVAL, 'Borracha Escolar', 'Borracha branca macia', 1.80, 250);
+
+INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
+VALUES (seq_produto.NEXTVAL, 'Marcador de Texto', 'Marcador fluorescente amarelo', 4.50, 180);
+
+INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
+VALUES (seq_produto.NEXTVAL, 'Agenda 2025', 'Agenda diária capa dura', 25.00, 100);
+
+INSERT INTO Produto (cod_produto, nome_produto, descricao_produto, preco_produto, qtd_estoque)
+VALUES (seq_produto.NEXTVAL, 'Pasta Plástica', 'Pasta organizadora A4 transparente', 6.00, 150);
+
 
 -- Endereços de clientes (ajustado)
 INSERT INTO Endereco_cliente (cpf_cliente, cep, numero) VALUES ('12345678901', '30140071', 100);
@@ -89,6 +125,22 @@ VALUES (2, 'Python Avançado', 'Impresso', 'Editora Alfa', 2023);
 INSERT INTO Livro (cod_produto, titulo, formato, editora, ano_publicacao)
 VALUES (3, 'Banco de Dados', 'Impresso', 'Editora Nova', 2021);
 
+INSERT INTO Livro (cod_produto, titulo, formato, editora, ano_publicacao)
+VALUES (6, 'Estruturas de Dados em C', 'Impresso', 'Editora Nexus', 2020);
+
+INSERT INTO Livro (cod_produto, titulo, formato, editora, ano_publicacao)
+VALUES (7, 'HTML e CSS', 'Impresso', 'Editora Nexus', 2021);
+
+INSERT INTO Livro (cod_produto, titulo, formato, editora, ano_publicacao)
+VALUES (8, 'Lógica de Programação', 'Impresso', 'Editora Alfa', 2019);
+
+INSERT INTO Livro (cod_produto, titulo, formato, editora, ano_publicacao)
+VALUES (9, 'Inteligência Artificial', 'Impresso', 'Editora Nova', 2022);
+
+INSERT INTO Livro (cod_produto, titulo, formato, editora, ano_publicacao)
+VALUES (10, 'Engenharia de Software', 'Impresso', 'Editora Alfa', 2021);
+
+
 -- Autores livro
 INSERT INTO autores_livro (cod_produto, autor) VALUES (1, 'Carlos Oliveira');
 INSERT INTO autores_livro (cod_produto, autor) VALUES (2, 'Luciana Martins');
@@ -97,13 +149,29 @@ INSERT INTO autores_livro (cod_produto, autor) VALUES (3, 'Fernando Silva');
 -- Artigos papelaria
 INSERT INTO Artigo_Papelaria (cod_produto, marca, categoria) VALUES (4, 'Tilibra', 'Caderno');
 INSERT INTO Artigo_Papelaria (cod_produto, marca, categoria) VALUES (5, 'Bic', 'Caneta');
+INSERT INTO Artigo_Papelaria (cod_produto, marca, categoria) VALUES (11, 'Faber-Castell', 'Lápis');
+INSERT INTO Artigo_Papelaria (cod_produto, marca, categoria) VALUES (12, 'Tilibra', 'Borracha');
+INSERT INTO Artigo_Papelaria (cod_produto, marca, categoria) VALUES (13, 'Stabilo', 'Marcador de Texto');
+INSERT INTO Artigo_Papelaria (cod_produto, marca, categoria) VALUES (14, 'Foroni', 'Agenda');
+INSERT INTO Artigo_Papelaria (cod_produto, marca, categoria) VALUES (15, 'Plasútil', 'Pasta Plástica');
 
 -- Fornece
-INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('12345678000199', 1);
-INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('11122233000144', 2);
-INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('12345678000199', 3);
-INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('98765432000155', 4);
-INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('98765432000155', 5);
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('12345678000199', 1); -- Java Básico - Editora Nova
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('11122233000144', 2); -- Python Avançado - Editora Alfa
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('12345678000199', 3); -- Banco de Dados - Editora Nova
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('20001534567874', 6); -- Estruturas de Dados em C - Editora Nexus
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('20001534567874', 7); -- HTML e CSS - Editora Nexus
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('11122233000144', 8); -- Lógica de Programação - Editora Alfa
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('12345678000199', 9); -- Inteligência Artificial - Editora Nova
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('11122233000144', 10); -- Engenharia de Software - Editora Alfa
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('98765432000155', 4);  -- Caderno Universitário - Papelaria Brasil
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('38265555503152', 5);  -- Caneta Esferográfica - Papelaria MG
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('38265555503152', 11); -- Lápis HB2 - Papelaria MG
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('98765432000155', 12); -- Borracha Escolar - Papelaria Brasil
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('38265555503152', 13); -- Marcador de Texto - Papelaria MG
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('98765432000155', 14); -- Agenda 2025 - Papelaria Brasil
+INSERT INTO Fornece (cnpj_fornecedor, cod_produto) VALUES ('38265555503152', 15); -- Pasta Plástica - Papelaria MG
+
 
 -- Armazena
 INSERT INTO Armazena (id_biblioteca, id_livro, data_adicao) VALUES ('12345678901', 1, SYSDATE);
@@ -247,19 +315,3 @@ VALUES ('55566677788', 4, 5, 5, 'Caneta muito boa', SYSDATE);
 
 INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
 VALUES ('99988877766', 5, 3, 5, 'Livro de banco de dados excelente', SYSDATE);
-
-INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
-VALUES ('10987654321', 9, 4, 4, 'Ótimo custo-benefício, chegou rápido.', TO_DATE('2025-10-31 10:00:00','YYYY-MM-DD HH24:MI:SS'));
-
-INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
-VALUES ('55566677788', 12, 5, 5, 'Canetas macias e duráveis. Recomendo!', TO_DATE('2025-11-02 14:30:00','YYYY-MM-DD HH24:MI:SS'));
-
-INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
-VALUES ('12345678901', 7, 3, 5, 'Material de BD essencial e muito completo.', TO_DATE('2025-11-03 09:15:00','YYYY-MM-DD HH24:MI:SS'));
-
-INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
-VALUES ('11122233344', 11, 1, 3, 'O conteúdo é bom, mas a diagramação poderia ser melhor.', TO_DATE('2025-11-04 11:00:00','YYYY-MM-DD HH24:MI:SS'));
-
-INSERT INTO Cliente_Avalia_Produto (cpf_cliente, cod_pedido, cod_produto, nota, comentario, data_avaliacao)
-VALUES ('99988877766', 14, 2, 5, 'Conteúdo de alta qualidade. Excelente aquisição.', TO_DATE('2025-11-05 08:30:00','YYYY-MM-DD HH24:MI:SS'));
-
